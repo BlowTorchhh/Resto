@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Nomor_Meja;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class HomeController extends Controller
         if(Auth::user()->id_role==3){
             $reservasi = Reservasi::with('user')->where('id_customer', Auth::user()->id)->where('tanggal', date('Y-m-d'))->get();
             $rekening = Rekening::all();
+            $meja = Nomor_Meja::where('status','Kosong')->get();
             $struks = array();
             foreach ($reservasi as $item) {
                 $id_reservasi = $item->id;
@@ -30,9 +32,9 @@ class HomeController extends Controller
             if (session('cart')) {
                 $cart = session()->get('cart');
                 // return dd($cart);
-                return view('index',compact('reservasi','menu','cart','rekening','struks'));
+                return view('index',compact('reservasi','menu','cart','rekening','struks','meja'));
             }
-            return view('index',compact('reservasi','menu','rekening','struks'));
+            return view('index',compact('reservasi','menu','rekening','struks','meja'));
         }
     }
         return view('index',compact('menu'));

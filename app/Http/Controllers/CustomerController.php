@@ -21,12 +21,32 @@ class CustomerController extends Controller
 
     public function reservasi_editProcess(Request $request, $id){
         $request->validate([
+            'nomor_meja' => 'required',
             'jam_booking' => 'required',
+        ]);
+        if($request->nama == null){
+            $nama = null;
+        }
+        else{
+            $nama = $request->nama;
+        }
+        $find_meja = DB::table('reservasi')->where('id',$id)->get('nomor_meja');
+
+        $meja = DB::table('nomor_meja')->where('nomor_meja',$find_meja->value('nomor_meja'))
+        ->update([
+            'status' => 'Kosong',
         ]);
 
         DB::table('reservasi')->where('id',$id)
         ->update([
+            'nama' => $nama,
+            'nomor_meja' => $request->nomor_meja,
             'jam_booking' => $request->jam_booking,
+        ]);
+
+        DB::table('nomor_meja')->where('nomor_meja',$request->nomor_meja)
+        ->update([
+            'status'=>'Di-Booking',
         ]);
 
         return redirect('/')->with('status', 'Reservasi Berhasil diedit!');

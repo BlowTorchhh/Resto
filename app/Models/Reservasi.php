@@ -14,6 +14,7 @@ class Reservasi extends Model
         'id',
         'code',
         'nomor_meja',
+        'nama',
         'id_customer',
         'jam_booking',
         'tanggal',

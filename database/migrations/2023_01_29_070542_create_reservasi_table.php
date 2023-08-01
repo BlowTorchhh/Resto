@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->integer('nomor_meja');
             $table->bigInteger('id_customer');
+            $table->string('nama')->default(null)->nullable();
             $table->time('jam_booking');
             $table->date('tanggal');
             $table->bigInteger('id_rekening');

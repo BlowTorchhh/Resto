@@ -167,7 +167,7 @@
                           <th>No</th>
                           <th>Kode</th>
                           <th>Nomor Meja</th>
-                          <th>Customer</th>
+                          <th>Customer | Atas Nama</th>
                           <th>Jam Booking</th>
                           <th>Pembayaran</th>
                           <th>Status</th>
@@ -180,7 +180,9 @@
                               <td>{{ $loop->iteration }} </td>
                               <td>{{ $item->code }}</td>
                               <td>{{ $item->nomor_meja }}</td>
-                              <td>{{ $item->user->name }}</td>
+                              <td>{{ $item->user->name }} @if ($item->nama != null)
+                                   | {{ $item->nama }}
+                              @endif</td>
                               <td>{{ $item->jam_booking }}</td>
                               <td>{{ $item->rekening->bank }}</td>
                               <td>{{ $item->status }}</td>
@@ -452,6 +454,27 @@ submitButton.addEventListener("click", function() {
               @method('patch')
               @csrf
           <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input name="kode" class="form-control" id="kode" placeholder="Kode" value="{{ $item->code }}" readonly type="text">
+              <label for="kode" class="form-label">Kode</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input name="user" class="form-control" id="user" placeholder="User" value="{{ $item->user->name }}" readonly type="text">
+              <label for="user" class="form-label">User Pengguna</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input name="nama" class="form-control" id="nama" placeholder="Nama" value="{{ $item->nama }}" type="text">
+              <label for="nama" class="form-label">Atas Nama</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select name="nomor_meja" id="nomor_meja" class="form-select" aria-label="Floating label select example">
+                      <option value="{{ $item->nomor_meja }}">{{ $item->nomor_meja }}</option>
+                  @foreach ($meja as $item_m)
+                      <option value="{{ $item_m->nomor_meja }}">{{ $item_m->nomor_meja }}</option>
+                  @endforeach
+              </select>
+              <label for="nomor_meja">Kategori</label>
+            </div>
               <div class="form-floating mb-3">
                   <input name="jam_booking" class="form-control" id="jam_booking" placeholder="Jam Booking" value="{{ $item->jam_booking }}" type="time">
                   <label for="jam_booking" class="form-label">Jam Booking</label>

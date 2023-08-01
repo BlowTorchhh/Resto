@@ -25,7 +25,16 @@
           </div>
         </div>
       @endif
-
+      @if ($errors->any())
+      @foreach ($errors->all() as $err)
+      <div class="alert alert-danger d-flex justify-content-center position-relative alert-dismissible" role="alert">
+        <div >
+          <b>{{ $err }}</b>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+      @endforeach
+  @endif
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Tambah
     </button>
