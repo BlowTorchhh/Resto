@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BahanController;
+use App\Http\Controllers\ChefControlller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\GalleryControlller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MejaController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\PrintController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\RestoControlller;
 use App\Http\Controllers\StrukController;
 use App\Http\Controllers\UserController;
 use App\Models\Kategori_menu;
@@ -71,6 +74,19 @@ Route::group(['middleware' => ['auth']], function (){
         Route::post('rekening_addProcess', [RekeningController::class, 'rekening_addProcess']);
         Route::patch('rekening_edit/{id}', [RekeningController::class, 'rekening_editProcess']);
         Route::delete('rekening_delete/{id}', [RekeningController::class, 'rekening_delete']);
+
+        Route::get('gallery', [GalleryControlller::class, 'index']);
+        Route::post('gallery_addProcess', [GalleryControlller::class, 'gallery_addProcess']);
+        Route::patch('gallery_edit/{id}', [GalleryControlller::class, 'gallery_editProcess']);
+        Route::delete('gallery_delete/{id}', [GalleryControlller::class, 'gallery_delete']);
+
+        Route::get('chef', [ChefControlller::class, 'index']);
+        Route::post('chef_addProcess', [ChefControlller::class, 'chef_addProcess']);
+        Route::patch('chef_edit/{id}', [ChefControlller::class, 'chef_editProcess']);
+        Route::delete('chef_delete/{id}', [ChefControlller::class, 'chef_delete']);
+
+        Route::post('resto_addProcess', [RestoControlller::class, 'resto_addProcess']);
+
     });
     Route::group(['middleware' => ['\App\Http\Middleware\cekUserLogin:2']], function (){
         Route::get('pegawai', [PegawaiController::class, 'index']);

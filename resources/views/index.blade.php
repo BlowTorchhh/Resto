@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Katalog Menu</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ asset('vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <title>Katalog Menu</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     @if (Auth::user())
       @if (session('success') || session('error'))
@@ -26,61 +40,185 @@
       </script>
       @endif
     @endif
-    <style>
-      .content {
-        background-size: cover;
-        background-position: center center;
-        height: 93vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-      }
-      .content h1 {
-        font-size: 3rem;
-        text-align: center;
-        margin-bottom: 0;
-      }
-      .content p {
-        font-size: 1.5rem;
-        text-align: center;
-        margin-top: 0;
-      }
-    </style>
+
+  <!-- Template Main CSS File -->
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+  {{-- <style>
+    #hero{
+      background: url("{{ asset('images/hero-bg.jpg') }}") top center;
+    }
+    .about{
+      background: url("{{ asset('images/about-bg.jpg') }}") center center;
+    }
+  </style> --}}
 
 </head>
-<body >
-  <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color:cornflowerblue">
-    <p class="navbar-brand col-md-3 col-lg-2 me-0 fs-6" href="#" style="padding-left: 3rem;"><i class="fa fa-laptop"></i> Resto</p>
-    <span></span>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-        @if (!Auth::user())
-        <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="{{ url('login') }}"><i class="fa fa-power-off"></i> Login</a>
-        </div>
-        </div>
-        @endif
-        @if (Auth::user())
-        <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-          <a href="#" class="nav-link px-3" data-bs-toggle="modal" data-bs-target="#ModalReservasi"><i class="fa fa-solid fa-scroll"></i>Lihat Reservasi</a>
-        </div>
-        </div>
-        <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Log out</a>
-        </div>
-        </div>
-        @endif
-      
-    </div>
-  </header>
+
+<body>
+
   
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0">
+        @if (count($countresto)==0)
+          Restaurant
+        @else
+          {{ $resto->nama_resto }}
+        @endif
+      </h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"></a> -->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
+          <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
+          <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      @if (!Auth::user())
+          <a href="{{ url('login') }}" class="login-btn scrollto d-none d-lg-flex">Login</a>
+      @else
+          <a href="{{ url('logout') }}" class="login-btn scrollto d-none d-lg-flex">Logout</a>
+      @endif
+      
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1>Selamat Datang ke <span>
+            @if (count($countresto)==0)
+                Restaurant
+            @else
+                {{ $resto->nama_resto }}
+            @endif  
+          </span></h1>
+          <h2>Menyajikan makanan dengan sepenuh Hati!</h2>
+          <h2>(Untuk memesan silahkan Login lalu ke Reservasi)</h2>
+
+          <div class="btns">
+            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Menu Kami</a>
+            <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Reservasi</a>
+            @if (!Auth::user())
+                <a href="{{ url('login') }}" class="btn-login animated fadeInUp scrollto">Login</a>
+            @else
+                <a href="{{ url('logout') }}" class="btn-login animated fadeInUp scrollto">Logout</a>
+            @endif
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+            <div class="about-img">
+              <img src="{{ asset('fotoresto/'.$resto->foto) }}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <h3>Deskripsi Restaurant</h3>
+            <p class="fst-italic">
+              @if (count($countresto)==0)
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+              @else
+                  {{ $resto->desc }}
+              @endif
+              
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Menu Section ======= -->
+    <section id="menu" class="menu section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Menu</h2>
+          <p>Menu</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-flters">
+              <li data-filter="*" class="filter-active">Semua</li>
+              @if (count($kategori)!=0)
+                  @foreach ($kategori as $item)
+                      <li data-filter=".filter-{{ $item->kategori }}">{{ $item->kategori }}</li>
+                  @endforeach
+              @endif
+            </ul>
+          </div>
+        </div>
+
+        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+
+          @if (count($menu)==0)
+              <h1>Belum ada Data Menu!</h1>
+          @else
+              @foreach ($menu as $item)
+              <div class="col-lg-6 menu-item filter-{{ $item->Kategori_Menu->kategori }}">
+            <img src="{{ asset('fotomenu/'.$item->foto) }}" class="menu-img" alt="">
+            <div class="menu-content">
+              {{ $item->nama_menu }}<span>{{ format_rupiah($item->harga)  }}</span>
+            </div>
+            <div class="menu-ingredients">
+              {{ $item->desc }}
+            </div>
+          </div>
+          @endforeach
+          @endif
+
+        </div>
+
+      </div>
+    </section><!-- End Menu Section -->
+
+    <!-- ======= Reservasi Section ======= -->
+    <section id="book-a-table" class="book-a-table">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Reservasi</h2>
+          <p>Reservasi</p>
+        </div>
+
+          @if (Auth::user())
+              <div class="text-center"><button type="button" data-bs-toggle="modal" data-bs-target="#ModalReservasi"><i class="fa fa-solid fa-scroll"></i>Reservasi</button></div>
+          @else
+              <div class="text-center"><button type="button"><a href="{{ url('login') }}" class="btn-login animated fadeInUp scrollto">Silahkan Login Terlebih Dahulu!</a></button></div>
+          @endif
+
+      </div>
+    </section><!-- End Reservasi Section -->
+
+    {{-- Modal Section --}}
     @if (Auth::user())
     
 
@@ -88,7 +226,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Info Reservasi dari {{ Auth::user()->name }}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Info Reservasi dari {{ Auth::user()->name }}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -108,7 +246,7 @@
               <div class="card card-body">
                 <div class="card-body table-responsive">
                   @foreach ($struks as $reservasiId => $strukItems)
-    <h3>Reservasi No : {{ $loop->iteration }}</h3>
+    <h3 style="color: black">Reservasi No : {{ $loop->iteration }}</h3>
     <table id="bootstrap-data-table" class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -219,7 +357,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Reservasi</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Tambah Reservasi</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -259,14 +397,14 @@ inputTime.addEventListener("input", function() {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Bayar Pakai Apa?</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Bayar Pakai Apa?</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
               @foreach ($rekening as $item)
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $item->id }}">
-                <label class="form-check-label" for="bank">{{ $item->bank }}</label>
+                <label class="form-check-label" for="bank" style="color: black">{{ $item->bank }}</label>
               </div>
               @endforeach
           </div>
@@ -311,7 +449,7 @@ submitButton.addEventListener("click", function() {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Menu</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Tambah Menu</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -337,7 +475,7 @@ submitButton.addEventListener("click", function() {
 
             <div class="collapse" id="keranjang" style="position: absolute; z-index: 1060; top: 10px; left: 30%;">
               
-              <div class="card card-body">
+              <div class="card card-body" style="color: black">
                 @if (!session('cart') || empty(session('cart')) || count(session('cart')) == 0)
                     Belum ada data Di keranjang
                 @endif
@@ -447,7 +585,7 @@ submitButton.addEventListener("click", function() {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Reservasi</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Edit Reservasi</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form action="{{ url('reservasi_editProcess',$item->id) }}" method="post">
@@ -464,7 +602,7 @@ submitButton.addEventListener("click", function() {
             </div>
             <div class="form-floating mb-3">
               <input name="nama" class="form-control" id="nama" placeholder="Nama" value="{{ $item->nama }}" type="text">
-              <label for="nama" class="form-label">Atas Nama</label>
+              <label for="nama" class="form-label" style="color: #6E7173">Atas Nama</label>
             </div>
             <div class="form-floating mb-3">
               <select name="nomor_meja" id="nomor_meja" class="form-select" aria-label="Floating label select example">
@@ -534,53 +672,93 @@ submitButton.addEventListener("click", function() {
     
     @endif
 
-    <div class="content" style="background-image: url({{ asset('images/background-resto.jpg') }});">
-      <div class="container" style="background-color: black; opacity:0.9;">
-        <h1>Selamat Datang di Restoran </h1>
-        <h1>Los Pollos Hermanos Family</h1>
-        <p>Jl. Panyileukan no 5 Rt. 05 Rw. 9 </p>
-      </div>
-    </div>
-    
-    <div class="content" style="background-image: url({{ asset('images/background-resto.jpg') }});">
-      @if (count($menu) == 0)
-      <div class="container" style="background-color: black; opacity:0.9;">
-        <h1>Belum ada menu yang tersedia </h1>
-      </div>
-      @endif
-      @if (count($menu) != 0)
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="container mb-3 rounded" style="background-color: black; opacity:0.9;">
-          <h1>Pilihan Menu Yang Tersedia </h1>
-          <p>*(Untuk memesan silahkan login lalu lihat Reservasi di Menu atas)</p>
+    {{-- End Modal Section --}}
+
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Beberapa Gambar yang ada di Restaurant Kami</p>
         </div>
-        <div class="carousel-indicators">
-          @foreach ($menu as $key => $item)
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="{{ $key }}" class="active" aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key }}"></button>
-          @endforeach
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-0">
+
+          @if (count($gallery)==0)
+              <h1>Belum Ada Gallery</h1>
+            @else
+              @foreach ($gallery as $item)
+                  <div class="col-lg-3 col-md-4">
+                    <div class="gallery-item">
+                      <a class="gallery-lightbox" data-gall="gallery-item">
+                      <img src="{{ asset('fotogallery/'.$item->foto) }}" alt="" class="img-fluid">
+                      </a>
+                  </div>
+          </div>
+              @endforeach
+          @endif
+
+          
+
         </div>
-        <div class="carousel-inner">
-          @foreach ($menu as $key => $item)
-          <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" >
-            <img src="{{ asset('fotomenu/'.$item->foto) }}" class="d-block w-100" alt="..." style="width: 100vh; height: 300px;">
-            <div class="carousel-caption d-none d-md-block rounded" style="opacity:0.8; background-color:black;">
-              <h5>{{ $item->nama_menu }}</h5>
-              <p><b>Harga</b> {{ format_rupiah($item->harga) }}</p>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Chefs Section ======= -->
+    <section id="chefs" class="chefs">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Chefs</h2>
+          <p>Chefs Kami</p>
+        </div>
+
+        <div class="row">
+
+          @if (count($chef)==0)
+              <h1>Belum ada Chef!</h1>
+          @else
+              @foreach ($chef as $item)
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{{ asset('fotochef/'.$item->foto) }}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>{{ $item->nama_chef }}</h4>
+                  <span>{{ $item->bagian }}</span>
+                </div>
+              </div>
             </div>
           </div>
-          @endforeach
+              @endforeach
+          @endif
+          
+
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+
       </div>
-      @endif
-          </div>
-    
+    </section><!-- End Chefs Section -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ asset('vendor/aos/aos.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ asset('js/main.js') }}"></script>
+
 </body>
+
 </html>

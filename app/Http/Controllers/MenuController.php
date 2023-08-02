@@ -69,7 +69,7 @@ class MenuController extends Controller
             'kategori_halal' => $request->kategori_halal,
             'foto' => $imagename,
         ]);
-        return redirect('menu')->with('status', 'Kategori berhasil di ubah!');
+        return redirect('menu')->with('status', 'Menu berhasil di ubah!');
     }
 
     public function menu_delete($id){
@@ -82,7 +82,7 @@ class MenuController extends Controller
         }
 
         $hapus->delete();
-        return redirect('menu')->with('status', 'Kategori berhasil di hapus!');
+        return redirect('menu')->with('status', 'Menu berhasil di hapus!');
     }
 
     

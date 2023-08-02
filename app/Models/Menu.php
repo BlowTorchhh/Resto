@@ -18,6 +18,7 @@ class Menu extends Model
         'status',
         'kategori_halal',
         'foto',
+        'desc',
     ];
 
     public function Kategori_Menu(){

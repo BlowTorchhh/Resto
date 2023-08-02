@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status',['Tersedia','Habis'])->default('Tersedia');
             $table->enum('kategori_halal',['Halal','Non-Halal'])->default('Halal');
             $table->string('foto');
+            $table->string('desc')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -37,8 +37,15 @@
                             <li class="nav-item">
                                 <a href="{{ url('role') }}" class="nav-link active" aria-current="page"><i class="fa fa-regular fa-splotch"></i> Role</a>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a href="{{ url('gallery') }}" class="nav-link active" aria-current="page"><i class="fa fa-solid fa-layer-group"></i> Gallery</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ url('kategori') }}" class="nav-link active" aria-current="page"><i class="fa fa-solid fa-layer-group"></i> Kategori</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('chef') }}" class="nav-link active" aria-current="page"><i class="fa fa-solid fa-utensils"></i> Chef</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('menu') }}" class="nav-link active" aria-current="page"><i class="fa fa-solid fa-utensils"></i> Menu</a>

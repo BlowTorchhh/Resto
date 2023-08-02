@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori_menu;
 use App\Models\Menu;
 use App\Models\Reservasi;
+use App\Models\Resto;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class AdminController extends Controller
         $kategori = Kategori_menu::all();
         $menu = Menu::with('Kategori_Menu')->get();
         $reservasi = Reservasi::with('user')->where('tanggal', date('Y-m-d'))->get();
+        $resto = Resto::all();
         $struks = array();
             foreach ($reservasi as $item) {
                 $id_reservasi = $item->id;
@@ -24,7 +26,7 @@ class AdminController extends Controller
                 $struk2 = $struk->groupBy('id_reservasi');
                 $struks[] = $struk2;
             }
-        return view('admin.index', compact('data','kategori','struks'),['menu'=>$menu, 'reservasi'=>$reservasi]);
+        return view('admin.index', compact('data','kategori','struks','resto'),['menu'=>$menu, 'reservasi'=>$reservasi]);
     }
 
     public function role_add(){

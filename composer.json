@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"
@@ -28,7 +29,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/RupiahHelper.php"
+            "app/Helpers/RupiahHelper.php",
+            "vendor/intervention/image/src/Intervention/Image/ImageServiceProvider.php"
         ]
     },
     "autoload-dev": {

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\chef;
+use App\Models\gallery;
+use App\Models\Kategori_menu;
 use App\Models\Menu;
 use App\Models\Nomor_Meja;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservasi;
+use App\Models\Resto;
 use App\Models\Struk;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +19,17 @@ class HomeController extends Controller
 {
     public function index(){
         $menu = Menu::all();
+        $countresto = Resto::all();
+        $resto = DB::table('resto')->first();
+        $chef = Chef::all();
+        $gallery = Gallery::all();
+        $kategori = Kategori_menu::all();
     if(Auth::user()){
         if(Auth::user()->id_role==3){
             $reservasi = Reservasi::with('user')->where('id_customer', Auth::user()->id)->where('tanggal', date('Y-m-d'))->get();
             $rekening = Rekening::all();
             $meja = Nomor_Meja::where('status','Kosong')->get();
+            
             $struks = array();
             foreach ($reservasi as $item) {
                 $id_reservasi = $item->id;
@@ -32,12 +42,12 @@ class HomeController extends Controller
             if (session('cart')) {
                 $cart = session()->get('cart');
                 // return dd($cart);
-                return view('index',compact('reservasi','menu','cart','rekening','struks','meja'));
+                return view('index',compact('reservasi','menu','cart','rekening','struks','meja','resto','chef','gallery','kategori','countresto'));
             }
-            return view('index',compact('reservasi','menu','rekening','struks','meja'));
+            return view('index',compact('reservasi','menu','rekening','struks','meja','resto','chef','gallery','kategori','countresto'));
         }
     }
-        return view('index',compact('menu'));
+        return view('index',compact('menu','resto','chef','gallery','kategori','countresto'));
     }
 
     public function addToCart(Request $request, $id){

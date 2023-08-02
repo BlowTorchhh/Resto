@@ -148,5 +148,63 @@
         </tbody>
     </table>    
 </div>
+@if (auth()->user()->id_role=='1')
+    
 
+@if (count($resto)==0)
+  <script type="text/javascript">
+          window.onload = () => {
+            $('#staticBackdrop').modal('show');
+          }
+        </script>
+
+  <!-- Modal -->
+  <form action="{{ url('resto_addProcess') }}" method="post" enctype="multipart/form-data">
+    @csrf
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Beri Info Resto</h1>
+        </div>
+        <div class="modal-body">
+            <div class="form-floating mb-3">
+                <input name="nama_resto" id="resto" class="form-control" placeholder="Resto" type="text">
+                <label for="resto" class="form-label">Beri Nama Resto!</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" type="file" placeholder="Masukkan Gambar Resto" name="foto" required id="formFile" required onchange="showLoading()">
+                <label for="formFile" class="form-label">Masukkan Gambar Resto</label>
+                <div id="loading" class="d-none">
+                  <i class="fa fa-spinner fa-spin"></i> Uploading...
+                </div>
+                <div id="success" class="d-none">
+                  Upload berhasil!
+                </div>
+            </div>
+            <div class="form-floating">
+                <textarea name="desc" class="form-control" placeholder="Deskripsi" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Deskripsi</label>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" >Selesai!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+@endif
+@endif
+<script>
+    function showLoading() {
+      var loading = document.getElementById('loading');
+      loading.classList.remove('d-none');
+
+      setTimeout(function() {
+    loading.classList.add('d-none');
+    var success = document.getElementById('success');
+    success.classList.remove('d-none');
+  }, 3000);
+    }
 @endsection
