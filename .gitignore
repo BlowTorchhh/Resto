@@ -16,7 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-# /public/fotomenu
-# /public/fotochef
-# /public/fotoresto
-# /public/fotogallery
+/public/fotomenu
+/public/fotochef
+/public/fotoresto
+/public/fotogallery

@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <title>Katalog Menu</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
     @if (Auth::user())
       @if (session('success') || session('error'))
         <script type="text/javascript">
@@ -611,7 +611,7 @@ submitButton.addEventListener("click", function() {
                       <option value="{{ $item_m->nomor_meja }}">{{ $item_m->nomor_meja }}</option>
                   @endforeach
               </select>
-              <label for="nomor_meja">Kategori</label>
+              <label for="nomor_meja">Nomor Meja</label>
             </div>
               <div class="form-floating mb-3">
                   <input name="jam_booking" class="form-control" id="jam_booking" placeholder="Jam Booking" value="{{ $item->jam_booking }}" type="time">
