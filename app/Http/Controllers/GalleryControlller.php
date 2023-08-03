@@ -26,8 +26,8 @@ public function gallery_addProcess(Request $request)
     $image = Image::make($image);
 
     // Resize gambar sesuai kebutuhan
-    $width = 800;
-    $height = 600;
+    $width = 512;
+    $height = 512;
     $image->resize($width, $height);
 
     // Simpan gambar ke dalam direktori penyimpanan

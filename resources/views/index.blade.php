@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
   <link href="{{ asset('vendor/animate.css/animate.min.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -20,7 +21,8 @@
   <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+  <link rel="manifest" href="{{ asset('manifest.json') }}">
+  <meta name="theme-color" content="#CDA45E">
     <title>Katalog Menu</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
@@ -51,6 +53,13 @@
       background: url("{{ asset('images/about-bg.jpg') }}") center center;
     }
   </style> --}}
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 
 </head>
 
@@ -132,7 +141,12 @@
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
             <div class="about-img">
-              <img src="{{ asset('fotoresto/'.$resto->foto) }}" alt="">
+              @if ($resto == null)
+                  <img src="{{ asset('fotoresto/about.jpg') }}" alt="">
+              @else
+                  <img src="{{ asset('fotoresto/'.$resto->foto) }}" alt="">
+              @endif
+              
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
@@ -202,7 +216,7 @@
 
     <!-- ======= Reservasi Section ======= -->
     <section id="book-a-table" class="book-a-table">
-      <div class="container" data-aos="fade-up">
+      <div class="container php-email-form" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Reservasi</h2>
@@ -210,9 +224,9 @@
         </div>
 
           @if (Auth::user())
-              <div class="text-center"><button type="button" data-bs-toggle="modal" data-bs-target="#ModalReservasi"><i class="fa fa-solid fa-scroll"></i>Reservasi</button></div>
+              <div class="text-center "><button type="button" data-bs-toggle="modal" data-bs-target="#ModalReservasi" class="textarea">Reservasi</button></div>
           @else
-              <div class="text-center"><button type="button"><a href="{{ url('login') }}" class="btn-login animated fadeInUp scrollto">Silahkan Login Terlebih Dahulu!</a></button></div>
+              <div class="text-center"><a href="{{ url('login') }}" class="btn-login animated fadeInUp scrollto"><button type="button" class="textarea">Silahkan Login Terlebih Dahulu!</button></a></div>
           @endif
 
       </div>
@@ -695,7 +709,7 @@ submitButton.addEventListener("click", function() {
               @foreach ($gallery as $item)
                   <div class="col-lg-3 col-md-4">
                     <div class="gallery-item">
-                      <a class="gallery-lightbox" data-gall="gallery-item">
+                      <a href="{{ asset('fotogallery/'.$item->foto) }}" class="gallery-lightbox" data-gall="gallery-item">
                       <img src="{{ asset('fotogallery/'.$item->foto) }}" alt="" class="img-fluid">
                       </a>
                   </div>
@@ -744,6 +758,23 @@ submitButton.addEventListener("click", function() {
 
       </div>
     </section><!-- End Chefs Section -->
+  </main>
+
+    <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Restaurantly</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -758,7 +789,18 @@ submitButton.addEventListener("click", function() {
 
   <!-- Template Main JS File -->
   <script src="{{ asset('js/main.js') }}"></script>
-
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register("{{ asset('/service-worker.js') }}")
+          .then((registration) => {
+            console.log('Service Worker berhasil didaftarkan:', registration);
+          })
+          .catch((error) => {
+            console.error('Pendaftaran Service Worker gagal:', error);
+          });
+      });
+    }
+    </script>
 </body>
-
 </html>

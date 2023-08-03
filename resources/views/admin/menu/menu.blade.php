@@ -39,6 +39,7 @@
             <th>Status</th>
             <th>Kategori Halal</th>
             <th>Foto</th>
+            <th>Deskripsi</th>
             @if (auth()->user()->id_role == "1")
             <th>Action</th>
             @endif
@@ -55,7 +56,8 @@
                 <td>{{ $item_m->kategori_halal }}</td>
                 <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#Modalfoto{{ $item_m->id }}">
                   Lihat Foto
-                </button>
+                </button></td>
+                <td>{{ $item_m->desc }}</td>
                 @if (auth()->user()->id_role == "1")
                 <td class="text-center">
                   <a href="{{ url('detail',$item_m->id) }}"><button type="button" class="btn btn-success" >Detail</button></a>
@@ -118,6 +120,10 @@
                         Upload berhasil!
                       </div>
                      </div>
+                     <div class="form-floating">
+                      <textarea class="form-control" name="desc" placeholder="Deskripsi" value="{{ $item_m->desc }}" id="floatingTextarea">{{ $item_m->desc }}</textarea>
+                      <label for="floatingTextarea">Deskripsi</label>
+                    </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                       <button type="submit" class="btn btn-primary">edit</button>
@@ -174,6 +180,10 @@
                   <div id="success" class="d-none">
                     Upload berhasil!
                   </div>
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control" name="desc" placeholder="Deskripsi" id="floatingTextarea"></textarea>
+              <label for="floatingTextarea">Deskripsi</label>
             </div>
         </div>
         <div class="modal-footer">

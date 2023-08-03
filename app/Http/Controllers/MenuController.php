@@ -29,12 +29,20 @@ class MenuController extends Controller
         $imagename = time().'_'.$image->getClientOriginalName();
         $image->move('fotomenu/', $imagename);
 
+        if ($request->desc == null) {
+            $desc=null;
+        } else {
+            $desc=$request->desc;
+        }
+        
+
         $menu = new Menu([
             'nama_menu' => $request->nama_menu,
             'harga' => $request->harga,
             'id_kategori' => $request->id_kategori,
             'kategori_halal' => $request->kategori_halal,
             'foto' => $imagename,
+            'desc' => $desc,
         ]);
         
         $menu->save();
@@ -60,7 +68,12 @@ class MenuController extends Controller
         $image2 = $request->file('image2');
         $imagename = time().'_'.$image2->getClientOriginalName();
         $image2->move('fotomenu/', $imagename);
-
+        if ($request->desc == null) {
+            $desc=null;
+        } else {
+            $desc=$request->desc;
+        }
+        
         $edit
         ->update([
             'nama_menu' => $request->nama_menu,
@@ -68,6 +81,7 @@ class MenuController extends Controller
             'status' => $request->status,
             'kategori_halal' => $request->kategori_halal,
             'foto' => $imagename,
+            'desc' => $desc,
         ]);
         return redirect('menu')->with('status', 'Menu berhasil di ubah!');
     }
